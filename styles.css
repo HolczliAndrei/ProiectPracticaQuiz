@@ -1,0 +1,99 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+#home {
+    margin: 0;
+    padding: 0;
+    background-image: url('b0.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: space-around;
+    height: 100vh;
+}
+
+
+#home section {
+    margin-top: 5%;
+    border-radius: 25px;
+    border: 4px solid #A5AF6E;/* $green */
+    padding-left: 15px; /* $medium */
+    padding-right: 15px; /* $medium */
+    height: 50%;
+    width: 30%;
+}
+
+#home .cube {
+    font-size: 8rem;
+    color: #BF5252; /* $orange */
+}
+#home h1 {
+    font-size: 24px; /* $large */
+    text-align: center;
+    color: #A5AF6E;
+}
+
+#home .play-button-container {
+    width: 100%;
+}
+.play-button-container ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.play-button-container li {
+    display: inline;
+}
+#home a.play-button {
+    text-align: center;
+    display: block;
+    border-radius: 4px; /* $button-radius */
+    background-color: #A5AF6E; /* $green */
+    color: white;
+    cursor: pointer;
+    padding: 12px; /* $normal */
+    transition: 0.3s linear all;
+}
+
+#home a.play-button:hover {
+    background-color: #A5AF6E; /* darken($green, 10%) */
+}
+
+#home .auth-container {
+    margin-top: 15px; /* $medium */
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#home #login {
+    background-color: #A5AF6E; /* $green */
+}
+
+#home #login:hover {
+    background-color: #A5AF6E; /* darken($green, 10%) */
+}
+
+#home #register {
+    background-color: #BF5252; /* $red */
+}
+
+#home #register:hover {
+    background-color: #8b0000; /* darken($red, 10%) */
+}
+
+#home .auth-container .auth-buttons {
+    transition: 0.3s linear all;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px; /* $button-radius */
+    padding: 12px 0; /* $normal */
+    text-align: center;
+    width: 48%;
+}
+ul{
+    list-style: none;
+}

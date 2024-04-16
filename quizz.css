@@ -1,0 +1,171 @@
+@media only screen and (min-width: 1024px) {
+    #home section {
+        width: 25vw;
+    }
+    #home .cube {
+        font-size: 1.5vw;
+    }
+    #home h1 {
+        font-size: 1.2vw;
+        margin-bottom: 0.5vw;
+    }
+    #home a.play-button {
+        padding: 0.5vw;
+    }
+    #home .auth-container .auth-buttons {
+        padding: 0.5vw 0;
+    }
+}
+
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+    #home section {
+        width: 40vw;
+    }
+    #home .cube {
+        font-size: 2vw;
+    }
+    #home h1 {
+        font-size: 1.5vw;
+    }
+    #home a.play-button {
+        padding: 1vw;
+    }
+    #home .auth-container .auth-buttons {
+        padding: 1vw 0;
+    }
+}
+
+/* Pentru ecrane mici */
+@media only screen and (max-width: 767px) {
+    #home {
+        flex-direction: column;
+    }
+    #home section {
+        width: 80vw;
+        margin-top: 10%;
+        margin-bottom: 5%;
+    }
+    #home .cube {
+        font-size: 3vw;
+    }
+    #home h1 {
+        font-size: 2vw;
+    }
+    #home a.play-button {
+        padding: 2vw;
+    }
+    #home .auth-container .auth-buttons {
+        padding: 2vw 0;
+    }
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+#home {
+    margin: 0;
+    padding: 0;
+    background-image: url('b0.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: space-around;
+    height: 100vh;
+}
+
+
+#home section {
+    margin-top: 5%;
+    border-radius: 25px;
+    border: 4px solid #A5AF6E;/* $green */
+    padding-left: 1.5vw; /* 1.5% din lățimea ecranului vizualizatorului */
+    padding-right: 1.5vw; /* 1.5% din lățimea ecranului vizualizatorului */
+    height: 50%;
+    width: 30vw; /* 30% din lățimea ecranului vizualizatorului */
+    overflow: hidden; /* Limităm conținutul în cadrul secțiunii */
+    display: flex; /* Adăugăm afișarea flexibilă pentru a alinia elementele */
+    flex-direction: column; /* Afișăm elementele vertical */
+    justify-content: center;
+}
+
+#home .cube {
+    font-size: 2vw;
+    color: #BF5252;
+}
+#home h1 {
+    font-size: 1.5vw;
+    text-align: center;
+    color: #A5AF6E;
+    margin-bottom: 1vw;
+}
+
+#home .play-button-container {
+    margin-top: 0.5vw; 
+    width: 100%;
+    overflow: hidden; 
+}
+.play-button-container ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.play-button-container li {
+    display: inline-flex;
+    width: 97%; 
+}
+#home a.play-button {
+    text-align: center;
+    display: inline-block;
+    border-radius: 4px; /* $button-radius */
+    background-color: #A5AF6E; /* $green */
+    color: white;
+    cursor: pointer;
+    padding: 1vw; /* 1% din lățimea ecranului vizualizatorului */
+    transition: 0.3s linear all;
+    width: 100%;
+}
+
+#home a.play-button:hover {
+    background-color: #A5AF6E; /* darken($green, 10%) */
+}
+
+#home .auth-container {
+    margin-top: 0.5vw; /* 0.5% din lățimea ecranului vizualizatorului */
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#home #login {
+    background-color: #6E88AF; /* Albastru */
+}
+
+#home #login:hover {
+    background-color: #4A6A8E; /* Albastru închis */
+}
+
+#home #register {
+    background-color: #BF5252; /* Roșu */
+}
+
+#home #register:hover {
+    background-color: #8b0000; /* Roșu închis */
+}
+
+#home .auth-container .auth-buttons {
+    transition: 0.3s linear all;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px; /* $button-radius */
+    padding: 1vw 0; /* 1% din lățimea ecranului vizualizatorului */
+    text-align: center;
+    width: 48%;
+}
+
+a{
+    text-decoration: none; 
+    list-style: none;
+}
