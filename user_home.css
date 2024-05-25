@@ -1,0 +1,10 @@
+body{
+    background-image: url("imagini/b0.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    height: 100vh;
+}
+.wrap{
+    height: 100%;
+}
