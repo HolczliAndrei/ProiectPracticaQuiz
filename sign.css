@@ -1,6 +1,11 @@
-body{
-    background-image: url('b0.jpg');
-    }
 section{
     margin-top:7%;
+}
+body{
+    background-image: url('b0.jpg');
+    background-size:cover;
+    background-position: center;
+    height: 85vh;
+    margin: 0;
+    padding: 0;
 }

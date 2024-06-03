@@ -1,0 +1,88 @@
+body {
+    background-image: url('b3.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+}
+input{
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3vh;
+}
+section {
+    background-color: white;
+    border-radius: 10px;
+    height: 80vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    align-items: center;
+}
+.form-inline {
+    width: 95%;
+    height: 70%;
+    border: 0.3vh solid #A5AF6E; 
+    padding: 3vh;
+    border-radius: 1vh;
+}
+
+.form-control {
+    text-align: center;
+    font-size: 1.5rem; /* Mărimea textului */
+    padding: 10px; /* Padding pentru spațiere */
+    border-radius: 10px; /* Bordură rotunjită */
+}
+
+input[type="text"] {
+    width: 100%;
+    height: 50px; 
+    opacity: 1; 
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3vh;
+}
+
+input[name="correct"]::placeholder,
+input[name="wrong[]"]::placeholder,
+input[name="submitquestion"] {
+    color: white;
+    opacity: 1; 
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3vh;
+}
+
+input[name="question"]::placeholder{
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3vh;
+}
+
+.form-control:hover {
+    transform: translateY(-3px); /* Suspendare la hover */
+    transition: transform 0.3s ease; /* Animatie la hover */
+}
+
+/* Stil pentru inputurile corecte */
+input[name="correct"],
+input[name="submitquestion"] {
+    background-color: #A5AF6E;
+}
+
+/* Stil pentru inputurile greșite */
+input[name="wrong[]"] {
+    background-color: #BF5252;
+}
+
+
+#link{
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3vh;
+}

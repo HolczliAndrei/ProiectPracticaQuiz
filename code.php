@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
     include 'connect.php';
     
@@ -19,28 +18,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         } else {
             $sqlRegistration = "SELECT * FROM `registration` WHERE username='$username' AND password='$password'";
             $resultRegistration = mysqli_query($con, $sqlRegistration);
-            
+
             if (mysqli_num_rows($resultRegistration) > 0) {
                 $_SESSION['username'] = $username;
                 $_SESSION['user_role'] = 'user';  
-                header('Location: select_exam.php?username=' . $username);
+                header('Location: home.php$username=' . $username);
                 exit();
             } else {
                 $_SESSION['message'] = 'Incorrect username or password!';
-                
                 header('Location: login.php');
                 exit();
             }
         }
     } else {
         $_SESSION['message'] = 'Please enter username and password!';
-        
         header('Location: login.php');
         exit();
     }
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
     include 'connect.php';
-    
     if (isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['confirm_password'])) {
         $username = mysqli_real_escape_string($con, $_POST['username']);
         $password = mysqli_real_escape_string($con, $_POST['password']);
@@ -60,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             if ($insert_user_result) {
                 $_SESSION['username'] = $username;
                 $_SESSION['user_role'] = 'user';
-                header('Location: home.php');
+                header('Location: home.php?username=' . $username);
                 exit();
             }
         }
@@ -74,9 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
     $name = mysqli_real_escape_string($con, $_POST["name"]);
     $description = mysqli_real_escape_string($con, $_POST["description"]);
-    $picture = "";
     $username = $_SESSION['username'];
     
+    // Verifică dacă o imagine a fost încărcată
     if (isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK) {
         $fileName = $_FILES["image"]["name"];
         $fileSize = $_FILES["image"]["size"];
@@ -85,19 +81,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         $imageExtension = explode('.', $fileName);
         $imageExtension = strtolower(end($imageExtension));
 
+        // Verifică dacă extensia și dimensiunea fișierului sunt valide
         if (!in_array($imageExtension, $validImageExtension)) {
             $_SESSION['messagebad'] = "Invalid image extension!";
-            header('Location: create-quiz.php');
+            header('Location: create-quiz.php?username=' . urlencode($username));
             exit();
         } elseif ($fileSize > 100000) { 
             $_SESSION['messagebad'] = "Invalid image size!";
-            header('Location: create-quiz.php');
+            header('Location: create-quiz.php?username=' . urlencode($username));
             exit();
-        } else {
-            $picture = uniqid() . '.' . $imageExtension;
         }
+
+        // Generează un nume unic pentru imagine
+        $picture = uniqid() . '.' . $imageExtension;
+
+        // Calea unde va fi salvată imaginea încărcată
+        $targetPath = "uploads/" . $picture;
+
+        // Mută fișierul încărcat în locația dorită
+        if (!move_uploaded_file($tmpName, $targetPath)) {
+            $_SESSION['messagebad'] = "Error uploading image!";
+            header('Location: create-quiz.php?username=' . urlencode($username));
+            exit();
+        }
+    } else {
+        $_SESSION['messagebad'] = "No image uploaded or an error occurred!";
+        header('Location: create-quiz.php?username=' . urlencode($username));
+        exit();
     }
 
+    // Adaugă informațiile quiz-ului în baza de date, inclusiv numele fișierului imaginii
     $query = "INSERT INTO `quizez` (name, description, picture) VALUES ('$name', '$description', '$picture')";
     if (mysqli_query($con, $query)) {
         $quiz_id = mysqli_insert_id($con);
@@ -106,10 +119,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         exit();
     } else {
         $_SESSION['messagebad'] = "Error: " . mysqli_error($con);
-        header('Location: create-quiz.php');
+        header('Location: create-quiz.php?username=' . urlencode($username));
         exit();
     }
-} elseif (isset($_POST["submitquestion"])) {
+}
+
+ elseif (isset($_POST["submitquestion"])) {
     include 'connect.php';
 
     $question_text = mysqli_real_escape_string($con, $_POST["question"]);
@@ -121,12 +136,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
     if (mysqli_query($con, $insert_question_query)) {
         $question_id = mysqli_insert_id($con);
 
-        $insert_correct_answer_query = "INSERT INTO answers (question_id, quiz_id, correct, answer_text) VALUES ('$question_id', '$quiz_id', 1, '$correct_answer')";
+        $insert_correct_answer_query = "INSERT INTO answers (question_id, quiz_id, correct) VALUES ('$question_id', '$quiz_id', 1)";
         mysqli_query($con, $insert_correct_answer_query);
 
         foreach ($wrong_answers as $wrong_answer) {
             $escaped_wrong_answer = mysqli_real_escape_string($con, $wrong_answer);
-            $insert_wrong_answer_query = "INSERT INTO answers (question_id, quiz_id, correct, answer_text) VALUES ('$question_id', '$quiz_id', 0, '$wrong_answer')";
+            $insert_wrong_answer_query = "INSERT INTO answers (question_id, quiz_id, correct) VALUES ('$question_id', '$quiz_id', 0)";
             mysqli_query($con, $insert_wrong_answer_query);
         }
 
@@ -139,7 +154,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         exit();
     }
 
-} else {
+} elseif (isset($_POST['delete_student'])) {
+    include 'connect.php';
+
+    $student_id = mysqli_real_escape_string($con, $_POST['delete_student']);
+
+    $delete_query = "DELETE FROM `registration` WHERE id='$student_id'";
+    $delete_query_run = mysqli_query($con, $delete_query);
+    $username = mysqli_real_escape_string($con, $_SESSION['username']);
+    if ($delete_query_run) {
+        $_SESSION['messagegood'] = "Student record deleted successfully!";
+        header('Location: edit-list.php?username=' . urlencode($username));
+        exit();
+    } else {
+        $_SESSION['messagebad'] = "Failed to delete student record!";
+        header('Location:edit-list.php?username=' . urlencode($username));
+        exit();
+    }
+}elseif(isset($_POST['logout'])){
+    include 'connect.php';
+    session_destroy();
+}
+else {
     header('Location: login.php');
     exit();
 }

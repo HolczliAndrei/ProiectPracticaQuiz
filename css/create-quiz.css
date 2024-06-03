@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    background-color: white;
+    border-radius: 1.646542261251372vh;
+}
+body{
+    background-image: url('../b3.jpg');
+    background-size:cover;
+    background-position: center;
+}
+.container {
+    display: grid;
+    grid-template-columns: auto auto; /* Două coloane */
+    grid-auto-rows: min-content; /* Înălțimea implicită a rândurilor */
+    gap: 10px; /* Spațiul între celule */
+}
+
+.column1, .column2, .column3 {
+    border: 1px solid black;
+    border-radius: 10px;;
+    padding: 4.25rem;
+    text-align: center;
+}
+
+.column4 {
+    grid-row: 1 / span 3; 
+    border: 1px solid black;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.coldesc {
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3vh;
+    color: black; 
+}
+.pt{
+    padding-top:4vh;
+}
+.pb{
+    padding-bottom:4vh;
+}
+.mt{
+    margin-top:3vh;
+}
+.mb{
+    margin-bottom: 4vh;
+}
+#drop-area{
+    width:60vh;
+    height:50vh;
+    padding:5vh;
+    border-radius: 10px; 
+}
+#img-view{
+    width:100%;
+    height:100%;
+    border-radius: 20px;
+    border:5px dashed #A5AF6E;
+    background-position: center;
+    background-size: cover;
+}
+.column3{
+    padding:0;
+}
+.column3 button {
+    width:100%;
+    height: 20vh;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Poetsen One', sans-serif;
+    font-size: 4.5em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.column3 button:hover {
+    background-color: darkred;
+}
+textarea[name="description"] {
+    width: 60vh; 
+    border-radius: 10px;
+    height: 10vh;
+    padding: 2vh;
+    font-size: 3vh; 
+    text-align: center;
+    resize: none; 
+    overflow: hidden; 
+    box-sizing: border-box; 
+}
+
+textarea[name="description"]:focus {
+    outline: none; 
+    border-color: #A5AF6E;
+}

@@ -1,288 +1,146 @@
+<?php
+session_start();
+if (!isset($_SESSION['username']) || $_SESSION['user_role'] !== 'admin') {
+    header('Location: login.php');
+    exit();
+}
+require 'connect.php';
+?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-	<meta name="author" content="AdminKit">
-	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
 	<link rel="stylesheet" href="admin.css">
-	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
-
-	<title>Admin page</title>
-
-	<link href="css/app.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-
 <body>
-	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand">
-          <span class="align-middle">Admin Panel</span>
-        </a>
 
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Pages
-					</li>
+<section class="mt-5 gradient-form">
+    <div class="container-fluid py-0 h-100">
+        <div class="row h-50">
+            <div class="col-md d-flex justify-content-center align-items-center" id="col1">
+                <div class="text-center column1">
+                    <div class="container-fluid d-flex flex-column align-items-center justify-content-center px-0" id="square">
+                        <div class="row w-100 h-50 sqr1">
+                            <div class="col d-flex justify-content-center align-items-center" id="form1">
+                                <div class="triangle"></div>
+                            </div>
+                            <div class="col d-flex justify-content-center align-items-center">
+                                <div class="square-shape"></div>
+                            </div>
+                        </div>
+                        <div class="row w-100 h-50">
+                            <div class="col d-flex justify-content-center align-items-center" id="form3">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="col d-flex justify-content-center align-items-center">
+                                <div class="rhombus"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <a target="" href="create-quiz.php?username=<?php echo urlencode($_SESSION['username']); ?>" class="custom-link"><p class="coldesc">Create a quiz</p></a>
+                </div>
+            </div>
 
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="index.html">
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-            </a>
-					</li>
+            <div class="col-md d-flex justify-content-center align-items-center" id="col2">
+                <div class="text-center col2">
+                    <p class="coldesc">Quizez promovation percentage</p>
+                    <div id="myChart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row h-50">
+            <div class="col-md d-flex justify-content-center align-items-center">
+                <div class="text-center col3">
+                    <a target="" href="edit-list.php?username=<?php echo urlencode($_SESSION['username']); ?>" class="custom-link"><p class="coldesc">Modify/view users list</p></a>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col"><hr style="height:2px;border-width:0;color:black;background-color:black;width:50%;margin-left:5vh;"></th>
+                                    <th scope="col"><hr style="height:2px;border-width:0;color:black;background-color:black;width:50%;margin-left:5vh;"></th>
+                                    <th scope="col"><hr style="height:2px;border-width:0;color:black;background-color:black;width:50%;margin-left:5vh;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">&#x2022;</th>
+                                    <td><hr style="height:2px;border-width:0;color:black;background-color:black;width:50%;margin-left:5vh;"></td>
+                                    <td><hr style="height:2px;border-width:0;color:black;background-color:black;width:50%;margin-left:5vh;"></td>
+                                    <td><div class="d-flex justify-content-center align-items-center"><div class="green"></div><div class="red"></div></div></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">&#x2022;</th>
+                                    <td><hr style="height:2px;border-width:0;color:black;background-color:black;width:50%;margin-left:5vh;"></td>
+                                    <td><hr style="height:2px;border-width:0;color:black;background-color:black;width:50%;margin-left:5vh;"></td>
+                                    <td><div class="d-flex justify-content-center align-items-center"><div class="green"></div><div class="red"></div></div></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">&#x2022;</th>
+                                    <td><hr style="height:2px;border-width:0;color:black;background-color:black;width:50%;margin-left:5vh;"></td>
+                                    <td><hr style="height:2px;border-width:0;color:black;background-color:black;width:50%;margin-left:5vh;"></td>
+                                    <td><div class="d-flex justify-content-center align-items-center"><div class="green"></div><div class="red"></div></div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md d-flex justify-content-center align-items-center " id="col4">
+            <div class="text-center emj-container w-50">
+                <form action="code.php" method="post">
+                <a target="" href="" class="custom-link"><p class="coldesc">Logout</p></a>
+                        <button type="submit" class="emj" style='border: none;outline: none;background: none;margin-right: 10px;'><i class="fas fa-sign-out-alt"></i></button>
+                </form>
+               <!-- <a target="" href="inbox.php" class="custom-link"><p class="coldesc">Logout</p></a>
+        <span class="emj" style='margin-right: 10px;'><i class="fas fa-sign-out-alt"></i></span>
+        <span class="emj" style='margin-left: 10px; margin-right: 10px;'>/</span>
+        <span class="emj" style='margin-left: 10px;'>&#128233;</span>  -->
+    </div>
+</div>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-profile.html">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Students</span>
-            </a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="quizz.php">
-              <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Log out</span>
+</div>
 
-				</ul>
+        </div>
+    </div>
+</section>
 
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
 
-	<script src="js/app.js"></script>
+<script>
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
 
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
-			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
-			gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
-			gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
-			// Line chart
-			new Chart(document.getElementById("chartjs-dashboard-line"), {
-				type: "line",
-				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-					datasets: [{
-						label: "Sales ($)",
-						fill: true,
-						backgroundColor: gradient,
-						borderColor: window.theme.primary,
-						data: [
-							2115,
-							1562,
-							1584,
-							1892,
-							1587,
-							1923,
-							2566,
-							2448,
-							2805,
-							3438,
-							2917,
-							3327
-						]
-					}]
-				},
-				options: {
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					tooltips: {
-						intersect: false
-					},
-					hover: {
-						intersect: true
-					},
-					plugins: {
-						filler: {
-							propagate: false
-						}
-					},
-					scales: {
-						xAxes: [{
-							reverse: true,
-							gridLines: {
-								color: "rgba(0,0,0,0.0)"
-							}
-						}],
-						yAxes: [{
-							ticks: {
-								stepSize: 1000
-							},
-							display: true,
-							borderDash: [3, 3],
-							gridLines: {
-								color: "rgba(0,0,0,0.0)"
-							}
-						}]
-					}
-				}
-			});
-		});
-	</script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			// Pie chart
-			new Chart(document.getElementById("chartjs-dashboard-pie"), {
-				type: "pie",
-				data: {
-					labels: ["Chrome", "Firefox", "IE"],
-					datasets: [{
-						data: [4306, 3801, 1689],
-						backgroundColor: [
-							window.theme.primary,
-							window.theme.warning,
-							window.theme.danger
-						],
-						borderWidth: 5
-					}]
-				},
-				options: {
-					responsive: !window.MSInputMethodContext,
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					cutoutPercentage: 75
-				}
-			});
-		});
-	</script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			// Bar chart
-			new Chart(document.getElementById("chartjs-dashboard-bar"), {
-				type: "bar",
-				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-					datasets: [{
-						label: "This year",
-						backgroundColor: window.theme.primary,
-						borderColor: window.theme.primary,
-						hoverBackgroundColor: window.theme.primary,
-						hoverBorderColor: window.theme.primary,
-						data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
-						barPercentage: .75,
-						categoryPercentage: .5
-					}]
-				},
-				options: {
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					scales: {
-						yAxes: [{
-							gridLines: {
-								display: false
-							},
-							stacked: false,
-							ticks: {
-								stepSize: 20
-							}
-						}],
-						xAxes: [{
-							stacked: false,
-							gridLines: {
-								color: "transparent"
-							}
-						}]
-					}
-				}
-			});
-		});
-	</script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var markers = [{
-					coords: [31.230391, 121.473701],
-					name: "Shanghai"
-				},
-				{
-					coords: [28.704060, 77.102493],
-					name: "Delhi"
-				},
-				{
-					coords: [6.524379, 3.379206],
-					name: "Lagos"
-				},
-				{
-					coords: [35.689487, 139.691711],
-					name: "Tokyo"
-				},
-				{
-					coords: [23.129110, 113.264381],
-					name: "Guangzhou"
-				},
-				{
-					coords: [40.7127837, -74.0059413],
-					name: "New York"
-				},
-				{
-					coords: [34.052235, -118.243683],
-					name: "Los Angeles"
-				},
-				{
-					coords: [41.878113, -87.629799],
-					name: "Chicago"
-				},
-				{
-					coords: [51.507351, -0.127758],
-					name: "London"
-				},
-				{
-					coords: [40.416775, -3.703790],
-					name: "Madrid "
-				}
-			];
-			var map = new jsVectorMap({
-				map: "world",
-				selector: "#world_map",
-				zoomButtons: true,
-				markers: markers,
-				markerStyle: {
-					initial: {
-						r: 9,
-						strokeWidth: 7,
-						stokeOpacity: .4,
-						fill: window.theme.primary
-					},
-					hover: {
-						fill: window.theme.primary,
-						stroke: window.theme.primary
-					}
-				},
-				zoomOnScroll: false
-			});
-			window.addEventListener("resize", () => {
-				map.updateSize();
-			});
-		});
-	</script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
-			var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
-			document.getElementById("datetimepicker-dashboard").flatpickr({
-				inline: true,
-				prevArrow: "<span title=\"Previous month\">&laquo;</span>",
-				nextArrow: "<span title=\"Next month\">&raquo;</span>",
-				defaultDate: defaultDate
-			});
-		});
-	</script>
+function drawChart() {
+    fetch('get_data.php')
+    .then(response => response.json())
+    .then(data => {
+        const formattedData = [['Name', 'Count']].concat(data);
+        const dataTable = google.visualization.arrayToDataTable(formattedData);
 
+        const options = {
+            title:'',
+            colors: ['#FF5733', '#33FF57'],
+            legend: {
+                textStyle: {
+                    fontName: 'Poetsen One', 
+                    fontSize: 15,            
+                    color: 'black'           
+                }
+            },
+        };
+
+        const chart = new google.visualization.PieChart(document.getElementById('myChart'));
+        chart.draw(dataTable, options);
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+</script>
 </body>
-
 </html>
