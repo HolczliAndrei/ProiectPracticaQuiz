@@ -11,7 +11,6 @@ require 'connect.php';
 <html>
 <head>
     <title>Edit quiz</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="stylesheet" href="edit-quiz.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,10 +50,12 @@ require 'connect.php';
         <input type="submit" name="submitquestion" class="form-control mt-4">
         <div class="row">
         <div class="col">
-    <a style="background-color:#6E88AF;border:none;" id="link" href="admin.php?username=<?php echo urlencode($_SESSION['username']); ?>" class="form-control btn btn-primary mt-5">Finish editing</a>
+        <input type="submit" name="finishquiz" value="Finish quiz" class="form-control mt-5 btn btn-primary" style="background-color:#6E88AF;border:none;">
 </div>
     </form>
     </div>
 </section>
+
+
 </body>
 </html>

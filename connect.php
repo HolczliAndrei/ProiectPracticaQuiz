@@ -3,7 +3,7 @@ $HOSTNAME = 'localhost';
 $USERNAME = 'root';
 $PASSWORD = '';
 $EMAIL = '';
-$DATABASE = 'conturi';
+$DATABASE = 'proiectpractica';
 
 $con = mysqli_connect($HOSTNAME, $USERNAME, $PASSWORD, $DATABASE);
 

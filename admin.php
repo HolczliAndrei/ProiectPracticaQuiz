@@ -10,7 +10,6 @@ require 'connect.php';
 <html>
 <head>
     <title>Admin</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://www.gstatic.com/charts/loader.js"></script>
 	<link rel="stylesheet" href="admin.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,7 +57,7 @@ require 'connect.php';
         <div class="row h-50">
             <div class="col-md d-flex justify-content-center align-items-center">
                 <div class="text-center col3">
-                    <a target="" href="edit-list.php?username=<?php echo urlencode($_SESSION['username']); ?>" class="custom-link"><p class="coldesc">Modify/view users list</p></a>
+                    <a target="" href="edit-list.php" class="custom-link"><p class="coldesc">Modify/view users list</p></a>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -94,15 +93,11 @@ require 'connect.php';
                 </div>
             </div>
             <div class="col-md d-flex justify-content-center align-items-center " id="col4">
-            <div class="text-center emj-container w-50">
-                <form action="code.php" method="post">
-                <a target="" href="" class="custom-link"><p class="coldesc">Logout</p></a>
-                        <button type="submit" class="emj" style='border: none;outline: none;background: none;margin-right: 10px;'><i class="fas fa-sign-out-alt"></i></button>
-                </form>
-               <!-- <a target="" href="inbox.php" class="custom-link"><p class="coldesc">Logout</p></a>
-        <span class="emj" style='margin-right: 10px;'><i class="fas fa-sign-out-alt"></i></span>
+            <div class="text-center emj-container">
+                <a target="" href="inbox.php" class="custom-link"><p class="coldesc">Reports / Inbox </p></a>
+        <span class="emj" style='margin-right: 10px;'>&#9888;</span>
         <span class="emj" style='margin-left: 10px; margin-right: 10px;'>/</span>
-        <span class="emj" style='margin-left: 10px;'>&#128233;</span>  -->
+        <span class="emj" style='margin-left: 10px;'>&#128233;</span>
     </div>
 </div>
 

@@ -30,7 +30,7 @@ $result = mysqli_query($con, $query);
     <div class="container-fluid pt-3 h-auto">
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-                <div class="col">
+                <div class="col">       
                     <div class="card">
                     <img style="width: 40px; height: 40px;" src="uploads/<?php echo $row['picture']; ?>" class="card-img-top mt-3 ms-3" alt="Quiz Image">
                         <div class="card-body">

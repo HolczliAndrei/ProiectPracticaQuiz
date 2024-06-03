@@ -79,7 +79,9 @@ input[name="wrong[]"] {
     background-color: #BF5252;
 }
 
-
+.row {
+    margin-bottom: 20px; 
+}
 #link{
     font-family: "Poetsen One", sans-serif;
     font-weight: 400;
