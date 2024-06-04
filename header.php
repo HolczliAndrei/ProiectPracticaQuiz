@@ -8,111 +8,70 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-    <link rel="stylesheet" href="css1/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="css1/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .logout {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            margin: 10px;
 
-
+            
+         
+            
+           
+            border: none;
+           
+            padding: 15px 30px;
+           
+        }
+    </style>
 </head>
 
 <body>
 
 <div class="all-content-wrapper">
-
-    <div class="header-advance-area">
-        <div class="header-top-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="header-top-wraper">
-                            <div class="row">
-                
-                                <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
-                                    <div class="header-top-menu tabl-d-n">
-                                        <ul class="nav navbar-nav mai-top-nav">
-                                            <li class="nav-item"><a href="#" class="nav-link">Select Exam</a>
-                                            </li>
-                                            <li class="nav-item"><a href="#" class="nav-link">Last Results</a>
-                                            </li>
-                                            <li class="nav-item"><a href="logout.php" class="nav-link">Logout</a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                                    <div class="header-right-info">
-                                        <ul class="nav navbar-nav mai-top-nav header-right-menu">
-
-
-                                            <li class="nav-item">
-                                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                                    <img src="img/avatar-mini2.jpg" alt="" />
-                                                    <span class="admin-name"><?php echo $_SESSION["username"]; ?></span>
-                                                    <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
-                                                </a>
-                                                <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-
-                                                    <li><a href="logout.php"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="container-fluid">
+        <div class="row justify-content-end">
+            <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 text-center">
+                <ul class="breadcome-menu" style="list-style-type: none;">
+                    <li><div id="countdowntimer" style="display: block; font-size: 35px;"></div></li>
+                </ul>
             </div>
-        </div>
-        <!-- Mobile Menu start -->
+            <div class="logout">
+                <form action="logout.php">
+                <button type="submit" class="logout" style="background-color: white; color: black;">Log out</button>
 
-        <!-- Mobile Menu end -->
-        <div class="breadcome-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="breadcome-list">
-                            <div class="row">
-
-                                <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 text-right">
-                                    <ul class="breadcome-menu">
-                                        <li><div id="countdowntimer" style="display: block;"></div>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-<script type="text/javascript">
-    setInterval(function(){
-        timer();
-    },1000);
-    function timer()
-    {
-        var xmlhttp=new XMLHttpRequest();
-        xmlhttp.onreadystatechange=function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-                if(xmlhttp.responseText=="00:00:01")
-                {
-                    window.location="result.php";
+    <script type="text/javascript">
+        setInterval(function(){
+            timer();
+        },1000);
+        function timer()
+        {
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                    if(xmlhttp.responseText=="00:00:01")
+                    {
+                        window.location="result.php";
+                    }
+
+                    document.getElementById("countdowntimer").innerHTML=xmlhttp.responseText;
+
                 }
-
-                document.getElementById("countdowntimer").innerHTML=xmlhttp.responseText;
-
-            }
-        };
-        xmlhttp.open("GET","forajax/load_timer.php",true);
-        xmlhttp.send(null);
-    }
-
+            };
+            xmlhttp.open("GET","forajax/load_timer.php",true);
+            xmlhttp.send(null);
+        }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
